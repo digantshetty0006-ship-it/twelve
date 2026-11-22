@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TWELVE — a small game about the year</title>
+  <meta name="description" content="Twelve months. One moving hand. A one-button game about keeping the year. Built by Digant Shetty.">
+  <meta name="theme-color" content="#F2EDE3">
+  <meta property="og:title" content="TWELVE — a small game about the year">
+  <meta property="og:description" content="Twelve months. One moving hand. Press when the hand crosses the lit month.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F2EDE3'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2317150F'/%3E%3Cline x1='32' y1='32' x2='32' y2='13' stroke='%23B23A1F' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%2317150F'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="masthead reveal">
+      <a class="wordmark" href="./" aria-label="Twelve, home">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="16" cy="16" r="12.5" fill="none" stroke="currentColor"/><line x1="16" y1="16" x2="16" y2="5.5" stroke="#B23A1F" stroke-width="1.5"/><circle cx="16" cy="16" r="1.8" fill="currentColor"/></svg>
+        </span>
+        <span class="wordmark-type">Twelve</span>
+        <span class="wordmark-no">No. 01</span>
+      </a>
+
+      <nav class="nav" aria-label="Main">
+        <button class="nav-link" id="how-to" type="button">How to play</button>
+        <button class="nav-link" id="about-open" type="button">About</button>
+      </nav>
+
+      <div class="masthead-meta">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>2026 / Solo</span>
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true" aria-label="Turn sound off">
+          <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span id="sound-label">Sound on</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="intro reveal" aria-labelledby="title">
+        <p class="eyebrow"><span class="square" aria-hidden="true"></span> Keep the year</p>
+        <h1 id="title">Twelve<span class="dot">.</span></h1>
+        <p class="lede">The year is a dial. The hand does not wait.</p>
+        <p class="body-copy">Press when the hand crosses the lit month. Keep all twelve and the year is yours. Tap the wrong month three times and it gets away.</p>
+
+        <div class="rules" aria-label="Rules">
+          <div class="rule">
+            <span class="rule-no">01</span>
+            <p>Lock the lit month as the hand passes through it.</p>
+          </div>
+          <div class="rule">
+            <span class="rule-no">02</span>
+            <p>Three wrong taps cost you the year. There is no timer.</p>
+          </div>
+          <div class="rule">
+            <span class="rule-no">03</span>
+            <p>Hit the middle of a month to keep it clear.</p>
+          </div>
+        </div>
+
+        <div class="best-slip" aria-live="polite">
+          <span class="best-label">Personal best</span>
+          <strong id="best-value">No year kept yet.</strong>
+          <span class="best-foot">Stored on this device only.</span>
+        </div>
+      </section>
+
+      <section class="table reveal" aria-label="The year dial">
+        <div class="table-meta">
+          <span>Instrument / 01</span>
+          <span id="round-label">365 days ahead</span>
+        </div>
+
+        <div class="dial-stage" id="dial-stage">
+          <svg class="dial-svg" id="dial" viewBox="0 0 640 640" role="img" aria-labelledby="dial-title dial-desc" tabindex="-1">
+            <title id="dial-title">A dial of the twelve months</title>
+            <desc id="dial-desc">A hand sweeps around a 12-month dial. The lit month is the one to lock.</desc>
+            <g id="day-ticks" aria-hidden="true"></g>
+            <g id="sectors"></g>
+            <g id="week-ticks" aria-hidden="true"></g>
+            <g id="month-labels" aria-hidden="true"></g>
+            <circle class="ring ring-outer" cx="320" cy="320" r="300" fill="none"/>
+            <circle class="ring ring-inner" cx="320" cy="320" r="178" fill="none"/>
+            <g id="needle" aria-hidden="true">
+              <line class="needle-tail" x1="320" y1="320" x2="320" y2="352"/>
+              <line class="needle-line" x1="320" y1="320" x2="320" y2="106"/>
+              <circle class="needle-tip" cx="320" cy="106" r="4.2"/>
+              <circle class="needle-cap" cx="320" cy="320" r="9"/>
+            </g>
+            <circle class="center-disc" cx="320" cy="320" r="101"/>
+          </svg>
+
+          <div class="dial-center" id="dial-center" aria-live="polite">
+            <p class="center-eyebrow" id="center-eyebrow">The year</p>
+            <p class="center-month" id="center-month">2026</p>
+            <p class="center-sub" id="center-sub">365 days ahead</p>
+          </div>
+
+          <div class="dial-feedback" id="feedback" aria-hidden="true"></div>
+        </div>
+
+        <div class="controls">
+          <button class="primary" id="primary" type="button">
+            <span id="primary-label">Start the year</span>
+            <span class="primary-icon" aria-hidden="true">→</span>
+          </button>
+          <p class="hint" id="hint">Press <kbd>Space</kbd> or tap the dial</p>
+          <p class="status" id="status" aria-live="polite">The dial is idle. Start whenever you're ready.</p>
+        </div>
+      </section>
+
+      <aside class="ledger reveal" aria-labelledby="ledger-title">
+        <div class="ledger-head">
+          <h2 id="ledger-title">The year, kept</h2>
+          <span class="ledger-year">2026</span>
+        </div>
+
+        <ol class="ledger-list" id="ledger-list"></ol>
+
+        <div class="ledger-stats">
+          <div class="stat stat-days">
+            <span class="stat-label">Days kept</span>
+            <strong><span id="days-kept">0</span><span class="stat-of"> / 365</span></strong>
+            <div class="day-track" aria-hidden="true"><span id="day-fill"></span></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat">
+              <span class="stat-label">Clear months</span>
+              <strong><span id="clear-count">0</span><span class="stat-of"> / 12</span></strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Mornings</span>
+              <div class="mornings" id="mornings" aria-label="3 mornings left"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="ledger-note">A month counts when you keep it. <em>Nothing else does.</em></p>
+      </aside>
+    </main>
+
+    <footer class="colophon reveal">
+      <span>Twelve / a small game about time</span>
+      <span class="colophon-mid">Built by <a href="https://github.com/digantshetty0006-ship-it" target="_blank" rel="noreferrer">Digant Shetty</a></span>
+      <span>Navi Mumbai <span id="clock">--:--</span> IST</span>
+      <span class="colophon-links"><a href="https://github.com/digantshetty0006-ship-it" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/digantshetty0006-ship-it/twelve" id="source-link" target="_blank" rel="noreferrer">Source ↗</a></span>
+    </footer>
+  </div>
+
+  <dialog class="paper-dialog" id="result-dialog">
+    <div class="dialog-inner">
+      <div class="dialog-top">
+        <span class="dialog-kicker">The year / 2026</span>
+        <button class="close" type="button" data-close aria-label="Close result">Close ×</button>
+      </div>
+      <p class="result-number"><span id="result-days">365</span><span class="result-of">/365</span></p>
+      <p class="result-label">days kept</p>
+      <h2 class="result-title" id="result-title">A year, kept.</h2>
+      <p class="result-copy" id="result-copy">Every month, in its place.</p>
+      <div class="result-grid">
+        <div><span>Clear months</span><strong id="result-clear">12 / 12</strong></div>
+        <div><span>Mornings left</span><strong id="result-mornings">3 / 3</strong></div>
+        <div><span>Best</span><strong id="result-best">365 days</strong></div>
+      </div>
+      <div class="dialog-actions">
+        <button class="primary" id="again" type="button"><span>Go again</span><span class="primary-icon" aria-hidden="true">↻</span></button>
+        <button class="text-button" id="copy-result" type="button">Copy result</button>
+      </div>
+      <p class="dialog-foot">No account. No server. Your year stays in this browser.</p>
+    </div>
+  </dialog>
+
+  <dialog class="paper-dialog" id="about-dialog">
+    <div class="dialog-inner">
+      <div class="dialog-top">
+        <span class="dialog-kicker">About / No. 01</span>
+        <button class="close" type="button" data-close aria-label="Close about">Close ×</button>
+      </div>
+      <h2 class="about-title">A year you can almost hold.</h2>
+      <p class="about-lede">I wanted a break from dashboards. This is a small game about the only deadline everyone shares.</p>
+      <p>Twelve months, three hundred sixty-five days, one moving hand. You cannot slow the year down. You can only learn its rhythm and put your hand on the right month.</p>
+      <div class="about-grid">
+        <div>
+          <span class="stat-label">Controls</span>
+          <p>Space, Enter or click to lock.<br><kbd>R</kbd> restarts. <kbd>M</kbd> toggles sound.</p>
+        </div>
+        <div>
+          <span class="stat-label">Built with</span>
+          <p>Hand-written SVG, vanilla JavaScript and the Web Audio API. No framework, no backend, no tracking.</p>
+        </div>
+      </div>
+      <p class="about-sign">Made by <a href="https://github.com/digantshetty0006-ship-it" target="_blank" rel="noreferrer">Digant Shetty</a>. The year is <span id="about-year">2026</span>, so it gets 365 days.</p>
+      <div class="dialog-actions">
+        <button class="primary" type="button" data-close-about><span>Back to the year</span><span class="primary-icon" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="game.js"></script>
+</body>
+</html>
