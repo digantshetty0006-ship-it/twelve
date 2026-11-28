@@ -1,22 +1,28 @@
 # TWELVE
 
-**Twelve months. One hand. Three wrong taps and the year is gone.**
+**Twelve months. Twelve levels. One hand.**
 
 **Play: [digantshetty0006-ship-it.github.io/twelve](https://digantshetty0006-ship-it.github.io/twelve/)**
 
-![TWELVE — a game about the year](preview.svg)
+![TWELVE — a year in twelve levels](assets/twelve-preview.jpg)
 
-A one-button timing game played on a year dial. The hand sweeps through 365 days; you lock each month as it passes. Hit the middle of a month to keep it clear. Keep all twelve and the year is yours.
+A one-button timing game played on a year dial. Each level hands you a contract of months to keep. Lock them as the hand sweeps past; a perfect lock pays more and earns a morning back. Run out of mornings and the level gets away. The hand gets faster every level, and the rules change: shuffled contracts, mirage decoys, a blinking target, a reversing hand, speed gusts, and a narrower perfect window.
 
 Most of my work is dashboards. This is the opposite: one dial, one key, no account. The year is the only deadline everyone shares.
+
+## The campaign
+
+- **12 levels**, from *First Light* to *The Long Year*, each with its own contract and twist.
+- **Three difficulty modes.** Calm gives you 5 mornings, Standard 3, Frenzy 2 with a faster hand and a narrower perfect window.
+- **Progress is saved.** Clear a level to unlock the next; your best score per level stays on the device.
 
 ## Rules
 
 - The hand moves clockwise through all twelve months.
 - Press `Space`, `Enter`, click the dial or tap it to lock the lit month.
-- Three wrong taps end the run. There is no timer; the hand sets the pace.
-- A lock near the centre of a month counts as **clear**.
-- Keep all twelve months to keep all 365 days.
+- A month only counts when it is in the contract. Mirages and decoys do not.
+- A lock near the centre of a month is **perfect**: bonus points, and every 4 perfect locks refund a morning.
+- Run out of mornings and the level ends. Retry it or pick another unlocked level.
 
 ## Controls
 
@@ -24,16 +30,18 @@ Most of my work is dashboards. This is the opposite: one dial, one key, no accou
 | --- | --- |
 | `Space` / `Enter` | Start, or lock the lit month |
 | Click / tap the dial | Same as the key |
-| `R` | Start the year over |
+| `R` | Restart the current level |
+| `L` | Open the level select |
 | `M` | Sound on / off |
 | `?` or `H` | About |
 
 ## What's inside
 
 - A hand-written SVG dial: 365 day ticks, 52 week ticks, 12 month sectors.
+- A 12-level campaign with a level rail, contract queue, modifiers, scoring and per-level bests.
 - Vanilla JavaScript. No framework, no build step, no dependencies.
 - Web Audio API tones. No audio files.
-- Best score in `localStorage`; nothing is sent anywhere.
+- Progress in `localStorage`; nothing is sent anywhere.
 - Keyboard controls, screen-reader status text and `prefers-reduced-motion` support.
 
 ## Run it locally
@@ -46,7 +54,7 @@ Then open `http://localhost:8080`.
 
 ## A note on the preview
 
-`preview.svg` is a separate, animated version of the dial for the README. It is not the game. The game adds the clock, the sound and the mistakes.
+`assets/twelve-preview.jpg` is a screenshot of the game. The game itself adds the clock, the sound and the mistakes.
 
 ---
 

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
   <title id="title">Digant Shetty — IT undergraduate, full-stack developer, AI/ML enthusiast</title>
-  <desc id="desc">A dark poster-style banner. Large cream lettering reads Digant Shetty over a coral-to-violet organic shape. The tagline reads IT undergraduate, full-stack developer, AI/ML enthusiast. Navi Mumbai, open to internships, 2026.</desc>
+  <desc id="desc">A dark poster-style banner. Large cream lettering reads Digant Shetty over a coral-to-violet organic shape. The tagline reads IT undergraduate, full-stack developer, AI/ML enthusiast. Navi Mumbai, 2026.</desc>
   <defs>
     <linearGradient id="blob" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#FF7A52"/>
@@ -61,9 +61,4 @@
 
   <text x="58" y="536" font-family="Consolas, ui-monospace, monospace" font-size="10" letter-spacing="2.2" fill="#9B9387">NAVI MUMBAI, IN  ·  B.TECH IT  ·  DY PATIL RAIT</text>
 
-  <g>
-    <rect x="978" y="517" width="164" height="27" rx="13.5" fill="none" stroke="#FF6B4A" stroke-width="1.2" opacity="0.9"/>
-    <circle cx="994" cy="530.5" r="3" fill="#FF6B4A"/>
-    <text x="1005" y="534" font-family="Consolas, ui-monospace, monospace" font-size="9.5" letter-spacing="1.6" fill="#FF8A70">OPEN TO INTERNSHIPS</text>
-  </g>
 </svg>

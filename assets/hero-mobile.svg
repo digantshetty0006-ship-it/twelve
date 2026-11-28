@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="560" viewBox="0 0 600 560" role="img" aria-labelledby="title desc">
   <title id="title">Digant Shetty — IT undergraduate, full-stack developer, AI/ML enthusiast</title>
-  <desc id="desc">A dark portrait banner. Large cream lettering reads Digant Shetty over a coral-to-violet shape. The tagline reads IT undergraduate, full-stack developer, AI/ML enthusiast. Open to internships, 2026.</desc>
+  <desc id="desc">A dark portrait banner. Large cream lettering reads Digant Shetty over a coral-to-violet shape. The tagline reads IT undergraduate, full-stack developer, AI/ML enthusiast. Navi Mumbai, 2026.</desc>
   <defs>
     <linearGradient id="blob" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#FF7A52"/>
@@ -59,9 +59,5 @@
   <text x="300" y="452" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="2.2" fill="#F0E9DC">FULL-STACK DEVELOPER</text>
   <text x="300" y="480" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="2.2" fill="#F0E9DC">AI/ML ENTHUSIAST</text>
 
-  <g>
-    <rect x="195" y="506" width="210" height="30" rx="15" fill="none" stroke="#FF6B4A" stroke-width="1.2" opacity="0.9"/>
-    <circle cx="212" cy="521" r="3" fill="#FF6B4A"/>
-    <text x="224" y="525" font-family="Consolas, ui-monospace, monospace" font-size="11" letter-spacing="1.5" fill="#FF8A70">OPEN TO INTERNSHIPS</text>
-  </g>
+  <text x="300" y="526" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="9" letter-spacing="2.4" fill="#9B9387">NAVI MUMBAI · 2026</text>
 </svg>

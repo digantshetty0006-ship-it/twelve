@@ -84,13 +84,6 @@
   <text x="958" y="242" text-anchor="middle" class="serif" font-size="30" fill="#17150F">2026</text>
   <text x="958" y="258" text-anchor="middle" class="mono" font-size="7.5" letter-spacing="1" fill="#5C564A">NOV · DAY 326</text>
 
-  <!-- availability stamp -->
-  <g>
-    <rect x="852" y="394" width="212" height="30" rx="2" fill="none" stroke="#B23A1F" opacity="0.75"/>
-    <circle cx="868" cy="409" r="3" fill="#B23A1F"/>
-    <text x="880" y="412.5" class="mono" font-size="9" letter-spacing="1.4" fill="#B23A1F">OPEN TO INTERNSHIPS</text>
-  </g>
-
   <!-- footer -->
   <text x="48" y="464" class="mono" font-size="8.5" letter-spacing="1.4" fill="#8D8576">SET IN GEORGIA &amp; SYSTEM MONO</text>
   <text x="1152" y="464" text-anchor="end" class="mono" font-size="8.5" letter-spacing="1.4" fill="#8D8576">ONE YEAR, KEPT</text>

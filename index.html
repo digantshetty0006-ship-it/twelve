@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TWELVE — a small game about the year</title>
-  <meta name="description" content="Twelve months. One moving hand. A one-button game about keeping the year. Built by Digant Shetty.">
+  <title>TWELVE — a year in twelve levels</title>
+  <meta name="description" content="Twelve months. Twelve levels. One moving hand. A one-button timing game about keeping the year. Built by Digant Shetty.">
   <meta name="theme-color" content="#F2EDE3">
-  <meta property="og:title" content="TWELVE — a small game about the year">
-  <meta property="og:description" content="Twelve months. One moving hand. Press when the hand crosses the lit month.">
+  <meta property="og:title" content="TWELVE — a year in twelve levels">
+  <meta property="og:description" content="Lock the months in your contract as the hand passes. Clear a level to unlock the next. The year gets faster.">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F2EDE3'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2317150F'/%3E%3Cline x1='32' y1='32' x2='32' y2='13' stroke='%23B23A1F' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%2317150F'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,11 +25,12 @@
           <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="16" cy="16" r="12.5" fill="none" stroke="currentColor"/><line x1="16" y1="16" x2="16" y2="5.5" stroke="#B23A1F" stroke-width="1.5"/><circle cx="16" cy="16" r="1.8" fill="currentColor"/></svg>
         </span>
         <span class="wordmark-type">Twelve</span>
-        <span class="wordmark-no">No. 01</span>
+        <span class="wordmark-no">No. 02</span>
       </a>
 
       <nav class="nav" aria-label="Main">
         <button class="nav-link" id="how-to" type="button">How to play</button>
+        <button class="nav-link" id="levels-open" type="button">Levels</button>
         <button class="nav-link" id="about-open" type="button">About</button>
       </nav>
 
@@ -47,47 +48,61 @@
       <section class="intro reveal" aria-labelledby="title">
         <p class="eyebrow"><span class="square" aria-hidden="true"></span> Keep the year</p>
         <h1 id="title">Twelve<span class="dot">.</span></h1>
-        <p class="lede">The year is a dial. The hand does not wait.</p>
-        <p class="body-copy">Press when the hand crosses the lit month. Keep all twelve and the year is yours. Tap the wrong month three times and it gets away.</p>
+        <p class="lede">Twelve months. Twelve levels. The hand does not wait.</p>
+        <p class="body-copy">Lock every month in the contract as the hand passes through it. Clear a level to unlock the next. The year gets faster, and the rules get stranger.</p>
 
         <div class="rules" aria-label="Rules">
           <div class="rule">
             <span class="rule-no">01</span>
-            <p>Lock the lit month as the hand passes through it.</p>
+            <p>Lock the lit month as the hand crosses it. The contract is the queue.</p>
           </div>
           <div class="rule">
             <span class="rule-no">02</span>
-            <p>Three wrong taps cost you the year. There is no timer.</p>
+            <p>Perfect timing pays more and earns mornings back. Misses cost them.</p>
           </div>
           <div class="rule">
             <span class="rule-no">03</span>
-            <p>Hit the middle of a month to keep it clear.</p>
+            <p>Clear the contract to unlock the next level. Twelve levels in all.</p>
           </div>
         </div>
 
+        <div class="difficulty" aria-label="Difficulty">
+          <span class="difficulty-label">Difficulty</span>
+          <div class="difficulty-options" role="group" aria-label="Choose difficulty">
+            <button type="button" class="difficulty-option" data-difficulty="calm" aria-pressed="false">Calm</button>
+            <button type="button" class="difficulty-option" data-difficulty="standard" aria-pressed="true">Standard</button>
+            <button type="button" class="difficulty-option" data-difficulty="frenzy" aria-pressed="false">Frenzy</button>
+          </div>
+          <p class="difficulty-note" id="difficulty-note">Three mornings. The year as intended.</p>
+        </div>
+
         <div class="best-slip" aria-live="polite">
-          <span class="best-label">Personal best</span>
-          <strong id="best-value">No year kept yet.</strong>
-          <span class="best-foot">Stored on this device only.</span>
+          <span class="best-label">Campaign</span>
+          <strong id="best-value">Level 01 / 12</strong>
+          <span class="best-foot" id="best-foot">No level cleared yet. Stored on this device.</span>
         </div>
       </section>
 
       <section class="table reveal" aria-label="The year dial">
         <div class="table-meta">
-          <span>Instrument / 01</span>
-          <span id="round-label">365 days ahead</span>
+          <span id="level-label">Level 01 / 12 · First Light</span>
+          <span id="round-label">3 months to keep</span>
         </div>
 
+        <div class="level-rail" id="level-rail" aria-label="Level progress"></div>
+
         <div class="dial-stage" id="dial-stage">
+          <div class="dial-halo" aria-hidden="true"></div>
           <svg class="dial-svg" id="dial" viewBox="0 0 640 640" role="img" aria-labelledby="dial-title dial-desc" tabindex="-1">
             <title id="dial-title">A dial of the twelve months</title>
-            <desc id="dial-desc">A hand sweeps around a 12-month dial. The lit month is the one to lock.</desc>
+            <desc id="dial-desc">A hand sweeps around a 12-month dial. The lit month is the one to lock. A second ring shows the contract progress.</desc>
             <g id="day-ticks" aria-hidden="true"></g>
             <g id="sectors"></g>
             <g id="week-ticks" aria-hidden="true"></g>
             <g id="month-labels" aria-hidden="true"></g>
             <circle class="ring ring-outer" cx="320" cy="320" r="300" fill="none"/>
             <circle class="ring ring-inner" cx="320" cy="320" r="178" fill="none"/>
+            <circle class="contract-ring" id="contract-ring" cx="320" cy="320" r="306" fill="none" transform="rotate(-90 320 320)"/>
             <g id="needle" aria-hidden="true">
               <line class="needle-tail" x1="320" y1="320" x2="320" y2="352"/>
               <line class="needle-line" x1="320" y1="320" x2="320" y2="106"/>
@@ -98,56 +113,74 @@
           </svg>
 
           <div class="dial-center" id="dial-center" aria-live="polite">
-            <p class="center-eyebrow" id="center-eyebrow">The year</p>
-            <p class="center-month" id="center-month">2026</p>
-            <p class="center-sub" id="center-sub">365 days ahead</p>
+            <p class="center-eyebrow" id="center-eyebrow">Level</p>
+            <p class="center-month" id="center-month">01</p>
+            <p class="center-sub" id="center-sub">First Light · 3 months</p>
           </div>
 
           <div class="dial-feedback" id="feedback" aria-hidden="true"></div>
+          <div class="dial-burst" id="burst" aria-hidden="true"></div>
         </div>
+
+        <div class="contract" aria-label="Contract queue">
+          <span class="contract-label">Contract</span>
+          <div class="contract-chips" id="contract-chips" aria-live="polite"></div>
+        </div>
+
+        <div class="twist-row" id="twist-row" aria-label="Active rules"></div>
 
         <div class="controls">
           <button class="primary" id="primary" type="button">
-            <span id="primary-label">Start the year</span>
+            <span id="primary-label">Start level 01</span>
             <span class="primary-icon" aria-hidden="true">→</span>
           </button>
           <p class="hint" id="hint">Press <kbd>Space</kbd> or tap the dial</p>
-          <p class="status" id="status" aria-live="polite">The dial is idle. Start whenever you're ready.</p>
+          <p class="status" id="status" aria-live="polite">Twelve levels. Start with the first.</p>
         </div>
       </section>
 
       <aside class="ledger reveal" aria-labelledby="ledger-title">
         <div class="ledger-head">
           <h2 id="ledger-title">The year, kept</h2>
-          <span class="ledger-year">2026</span>
+          <span class="ledger-year" id="ledger-year">2026</span>
         </div>
 
         <ol class="ledger-list" id="ledger-list"></ol>
 
         <div class="ledger-stats">
           <div class="stat stat-days">
-            <span class="stat-label">Days kept</span>
-            <strong><span id="days-kept">0</span><span class="stat-of"> / 365</span></strong>
+            <span class="stat-label">Contract</span>
+            <strong><span id="contract-done">0</span><span class="stat-of"> / <span id="contract-total">3</span></span></strong>
             <div class="day-track" aria-hidden="true"><span id="day-fill"></span></div>
           </div>
           <div class="stat-row">
             <div class="stat">
-              <span class="stat-label">Clear months</span>
-              <strong><span id="clear-count">0</span><span class="stat-of"> / 12</span></strong>
+              <span class="stat-label">Score</span>
+              <strong id="score-value">0</strong>
             </div>
             <div class="stat">
               <span class="stat-label">Mornings</span>
               <div class="mornings" id="mornings" aria-label="3 mornings left"></div>
             </div>
           </div>
+          <div class="stat-row stat-row-mini">
+            <div class="stat">
+              <span class="stat-label">Perfect</span>
+              <strong id="perfect-value">0</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Combo</span>
+              <strong id="combo-value">×1.0</strong>
+            </div>
+          </div>
         </div>
 
-        <p class="ledger-note">A month counts when you keep it. <em>Nothing else does.</em></p>
+        <p class="ledger-note">A month counts when it is in the contract. <em>Nothing else does.</em></p>
       </aside>
     </main>
 
     <footer class="colophon reveal">
-      <span>Twelve / a small game about time</span>
+      <span>Twelve / a year in twelve levels</span>
       <span class="colophon-mid">Built by <a href="https://github.com/digantshetty0006-ship-it" target="_blank" rel="noreferrer">Digant Shetty</a></span>
       <span>Navi Mumbai <span id="clock">--:--</span> IST</span>
       <span class="colophon-links"><a href="https://github.com/digantshetty0006-ship-it" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/digantshetty0006-ship-it/twelve" id="source-link" target="_blank" rel="noreferrer">Source ↗</a></span>
@@ -157,39 +190,57 @@
   <dialog class="paper-dialog" id="result-dialog">
     <div class="dialog-inner">
       <div class="dialog-top">
-        <span class="dialog-kicker">The year / 2026</span>
+        <span class="dialog-kicker" id="result-kicker">Level 01 / 12</span>
         <button class="close" type="button" data-close aria-label="Close result">Close ×</button>
       </div>
-      <p class="result-number"><span id="result-days">365</span><span class="result-of">/365</span></p>
-      <p class="result-label">days kept</p>
-      <h2 class="result-title" id="result-title">A year, kept.</h2>
-      <p class="result-copy" id="result-copy">Every month, in its place.</p>
+      <p class="result-number"><span id="result-score">0</span></p>
+      <p class="result-label" id="result-label">points</p>
+      <h2 class="result-title" id="result-title">First Light, kept.</h2>
+      <p class="result-copy" id="result-copy">The contract is clear.</p>
       <div class="result-grid">
-        <div><span>Clear months</span><strong id="result-clear">12 / 12</strong></div>
-        <div><span>Mornings left</span><strong id="result-mornings">3 / 3</strong></div>
-        <div><span>Best</span><strong id="result-best">365 days</strong></div>
+        <div><span>Contract</span><strong id="result-contract">3 / 3</strong></div>
+        <div><span>Perfect</span><strong id="result-perfect">0</strong></div>
+        <div><span>Best combo</span><strong id="result-combo">×1.0</strong></div>
       </div>
       <div class="dialog-actions">
-        <button class="primary" id="again" type="button"><span>Go again</span><span class="primary-icon" aria-hidden="true">↻</span></button>
+        <button class="primary" id="result-primary" type="button"><span id="result-primary-label">Next level</span><span class="primary-icon" aria-hidden="true">→</span></button>
+        <button class="text-button" id="result-levels" type="button">Level select</button>
         <button class="text-button" id="copy-result" type="button">Copy result</button>
       </div>
-      <p class="dialog-foot">No account. No server. Your year stays in this browser.</p>
+      <p class="dialog-foot">Progress is stored on this device only.</p>
+    </div>
+  </dialog>
+
+  <dialog class="paper-dialog levels-dialog" id="levels-dialog">
+    <div class="dialog-inner">
+      <div class="dialog-top">
+        <span class="dialog-kicker">Campaign / 12 levels</span>
+        <button class="close" type="button" data-close aria-label="Close levels">Close ×</button>
+      </div>
+      <h2 class="levels-title">Choose a level.</h2>
+      <p class="levels-lede">Every level adds speed and a new rule. Clear one to unlock the next.</p>
+      <div class="level-grid" id="level-grid"></div>
+      <div class="dialog-actions">
+        <button class="text-button" id="reset-progress" type="button">Reset progress</button>
+      </div>
+      <p class="dialog-foot">Progress is stored on this device only.</p>
     </div>
   </dialog>
 
   <dialog class="paper-dialog" id="about-dialog">
     <div class="dialog-inner">
       <div class="dialog-top">
-        <span class="dialog-kicker">About / No. 01</span>
+        <span class="dialog-kicker">About / No. 02</span>
         <button class="close" type="button" data-close aria-label="Close about">Close ×</button>
       </div>
       <h2 class="about-title">A year you can almost hold.</h2>
-      <p class="about-lede">I wanted a break from dashboards. This is a small game about the only deadline everyone shares.</p>
-      <p>Twelve months, three hundred sixty-five days, one moving hand. You cannot slow the year down. You can only learn its rhythm and put your hand on the right month.</p>
+      <p class="about-lede">Twelve levels, one dial, and a hand that keeps getting faster.</p>
+      <p>Each level hands you a contract: a handful of months to keep. Lock them as the hand passes. Perfect timing pays more and earns mornings back. Clear the contract to unlock the next level.</p>
+      <p>The rules change as you climb: shuffled contracts, a false light, a blinking target, a reversing hand, sudden gusts, and a narrower perfect window. The last level uses every trick at once.</p>
       <div class="about-grid">
         <div>
           <span class="stat-label">Controls</span>
-          <p>Space, Enter or click to lock.<br><kbd>R</kbd> restarts. <kbd>M</kbd> toggles sound.</p>
+          <p>Space, Enter or click to lock.<br><kbd>R</kbd> restarts the level. <kbd>M</kbd> toggles sound. <kbd>L</kbd> opens levels.</p>
         </div>
         <div>
           <span class="stat-label">Built with</span>
